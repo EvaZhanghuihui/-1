@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "QuestionRecord": {
+      "title": "Question Record",
+      "description": "A record of a wrong question and its generated analogous questions.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the record."
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the user who owns this record."
+        },
+        "originalQuestion": {
+          "type": "string",
+          "description": "The text of the original wrong question."
+        },
+        "originalOptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional list of options for the original question."
+        },
+        "originalAnswer": {
+          "type": "string",
+          "description": "The correct answer to the original question."
+        },
+        "knowledgePoint": {
+          "type": "string",
+          "description": "The core knowledge point identified for the question."
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject of the question (e.g., Math, Physics)."
+        },
+        "analogousQuestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "answer": { "type": "string" },
+              "analysis": { "type": "string", "description": "Analysis focusing on common mistakes." }
+            }
+          },
+          "description": "Three AI-generated similar questions."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the record was created."
+        }
+      },
+      "required": ["userId", "originalQuestion", "knowledgePoint", "analogousQuestions", "createdAt"]
+    }
+  },
+  "firestore": {
+    "questions": {
+      "schema": "QuestionRecord",
+      "description": "Collection of wrong questions and their transformations."
+    }
+  }
+}
